@@ -44,10 +44,6 @@ public class Calculator
                 SetOperator(divide, i);
             }
         }
-        foreach (var item in operations)
-        {
-            Debug.Log("Borders " + item.borders[0] + " " + item.borders[1]);
-        }
         for (int i = 0; i < equationSB.Length; i++)
         {
             if (equationSB[i] == '+')

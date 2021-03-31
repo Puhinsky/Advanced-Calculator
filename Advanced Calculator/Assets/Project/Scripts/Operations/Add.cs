@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Add : Operator
 {
-    public override double GetResult()
+    protected override double GetTempResult()
     {
         return operations[0].GetResult() + operations[1].GetResult();
     }
