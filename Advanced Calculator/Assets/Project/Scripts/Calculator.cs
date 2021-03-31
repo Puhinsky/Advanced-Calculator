@@ -7,9 +7,12 @@ public class Calculator
 {
     List<Operation> operations = new List<Operation>();
 
-    public void Decide(string equation)
+    public CalculatorPresenter presenter;
+
+    public void Decide(string equation, CalculatorPresenter presenter)
     {
-        equation += "$";
+        this.presenter = presenter;
+        equation += "\0";
         StringBuilder equationSB = new StringBuilder(equation);
 
         for (int i = 0; i < equationSB.Length; i++)
@@ -19,7 +22,7 @@ public class Calculator
                 Constant constant = new Constant();
                 constant.borders[0] = i;
                 string value = "";
-                while (char.IsDigit(equationSB[i]))
+                while (char.IsDigit(equationSB[i]) || equationSB[i]==',')
                 {
                     value += equationSB[i];
                     i++;
@@ -61,6 +64,16 @@ public class Calculator
         {
             Debug.Log(item.GetResult());
         }
+        presenter.ShowResult(operations[operations.Count - 1].GetResult());
+    }
+
+    public void Clear()
+    {
+        for (int i = 0; i < operations.Count; i++)
+        {
+            operations[i] = null;
+        }
+        operations.Clear();
     }
 
     private void SetOperator(Operator _operator, int position)
