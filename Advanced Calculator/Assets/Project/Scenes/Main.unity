@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15eb15e8a1cbe6d4996a4b8f02d38180, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  equation: 12*15
+  equation: 12-6
 --- !u!1 &1917557073
 GameObject:
   m_ObjectHideFlags: 0

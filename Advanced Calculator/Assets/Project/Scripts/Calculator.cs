@@ -28,6 +28,7 @@ public class Calculator
                 double.TryParse(value, out constant.value);
                 constant.borders[1] = i;
                 operations.Add(constant);
+                Debug.Log("Borders " + constant.borders[0] + " " + constant.borders[1]);
             }
         }
         for (int i = 0; i < equationSB.Length; i++)
@@ -35,26 +36,57 @@ public class Calculator
             if (equationSB[i] == '*')
             {
                 Multiply multiply = new Multiply();
-                int position = i;
-                foreach (var operation in operations)
-                {
-                    if (operation.borders[0] == position + 1)
-                    {
-                        multiply.operations[0] = operation;
-                        multiply.borders[0] = operation.borders[0];
-                    }
-                    if (operation.borders[1] == position - 1)
-                    {
-                        multiply.operations[1] = operation;
-                        multiply.borders[1] = operation.borders[1];
-                    }
-                }
-                operations.Add(multiply);
+                SetOperator(multiply, i);
+            }
+            if (equationSB[i] == '/')
+            {
+                Divide divide = new Divide();
+                SetOperator(divide, i);
+            }
+        }
+        foreach (var item in operations)
+        {
+            Debug.Log("Borders " + item.borders[0] + " " + item.borders[1]);
+        }
+        for (int i = 0; i < equationSB.Length; i++)
+        {
+            if (equationSB[i] == '+')
+            {
+                Add add = new Add();
+                SetOperator(add, i);
+            }
+            if (equationSB[i] == '-')
+            {
+                Substract substract = new Substract();
+                SetOperator(substract, i);
             }
         }
         foreach (var item in operations)
         {
             Debug.Log(item.GetResult());
         }
+    }
+
+    private void SetOperator(Operator _operator, int position)
+    {
+        Debug.Log("Position " + position);
+        foreach (var operation in operations)
+        {
+            if (operation.borders[1] == position - 1)
+            {
+                _operator.operations[0] = operation;
+                _operator.borders[0] = operation.borders[0];
+                operation.borders[0] = -1;
+                operation.borders[1] = -1;
+            }
+            if (operation.borders[0] == position + 1)
+            {
+                _operator.operations[1] = operation;
+                _operator.borders[1] = operation.borders[1];
+                operation.borders[0] = -1;
+                operation.borders[1] = -1;
+            }
+        }
+        operations.Add(_operator);
     }
 }

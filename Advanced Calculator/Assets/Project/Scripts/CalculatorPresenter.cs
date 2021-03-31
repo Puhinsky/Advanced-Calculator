@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CalculatorPresenter : MonoBehaviour
 {
-    public string equation = "12*15";
+    public string equation = "12*15+61";
 
     private Calculator calculator = new Calculator();
 
