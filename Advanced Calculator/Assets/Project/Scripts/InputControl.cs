@@ -66,7 +66,7 @@ public class InputControl : MonoBehaviour
 
     public void InputSymbol(string value)
     {
-        if (equation.Length <= 1 && equation.StartsWith("0"))
+        if (equation.Length <= 1 && equation.StartsWith("0")&& value != ",")
         {
             equation = value;
             caretPosition = 0;
